@@ -1,0 +1,13 @@
+DECLARE @BackupPath NVARCHAR(260)
+DECLARE @BackupFileName NVARCHAR(260)
+DECLARE @CurrentDate NVARCHAR(20)
+
+SET @BackupPath = '\\SQLDBbackup\E$\IRIS-SQL-UAT\IRIS\IRIS_ENTRUST\'
+SET @CurrentDate = CONVERT(NVARCHAR(20), GETDATE(), 112) -- Format: YYYYMMDD
+SET @BackupFileName = @BackupPath + 'IRIS_ENTRUST_Backup_' + @CurrentDate + '.bak'
+
+BACKUP DATABASE IRIS_ENTRUST
+TO DISK = @BackupFileName
+WITH FORMAT, COMPRESSION, INIT;
+
+
